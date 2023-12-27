@@ -26,6 +26,8 @@ def success_response(data, code=200):
 def failure_response(message, code=404):
     return json.dumps({"error": message}), code
 
+# List representing all possible labels that a restaurnt could use
+labels = ["Vegan", "Thai", "Jamaican", "Korean", "Chinese", "Japanese", "Vietnamese", "LGBT+"]
 
 # Routes - Restaurant Routes
 # GET: Get all restaurants
@@ -51,12 +53,10 @@ def get_rest(rest_id):
     return success_response(restaurant.serialize())
 
 
-
 # GET: Get information about all restaurants that fall under a specific label "label"
 @app.route("/restaurants/<string:label>/")
 def get_spec_rest(label):
     pass
-
 
 # GET: Get all reviews for a specific restaurant with id "rest_id"
 @app.route("/restaurants/<int:rest_id>/reviews/")
