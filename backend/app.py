@@ -28,7 +28,7 @@ def failure_response(message, code=404):
 
 
 # Routes - Restaurant Routes
-# GET: Get information about all restaurants
+# GET: Get all restaurants
 @app.route("/")
 @app.route("/restaurants/")
 def base():
@@ -39,10 +39,17 @@ def base():
     return success_response({"restaurants": restaurants})
 
 
-# GET: Get information about a specific restaurant with id "rest_id"
+# GET: Get information about a specific restaurant
 @app.route("/restaurants/<int:rest_id>/")
 def get_rest(rest_id):
-    pass
+    """
+    Endpoint that returns the specific restaurant with restaurant id 'rest_id'
+    """
+    restaurant = Restaurant.query.filter_by(id=rest_id).first()
+    if restaurant is None: # If the restaurant does not exist
+        return failure_response("Restaurant not found!")
+    return success_response(restaurant.serialize())
+
 
 
 # GET: Get information about all restaurants that fall under a specific label "label"
