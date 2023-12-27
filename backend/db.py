@@ -16,6 +16,7 @@ class Restaurant(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True) # Do we need to include "nullable=False" in this line?
     name = db.Column(db.String, nullable=False)
     desc = db.Column(db.String, nullable=False) # TODO: Limit character size of description
+    labels = db.Column(db.String, nullable=False)
 
     users = db.relationship("User", secondary=rest_user_association, back_populates="users")
 
@@ -25,6 +26,7 @@ class Restaurant(db.Model):
         """
         self.name = kwargs.get("name")
         self.desc = kwargs.get("desc")
+        self.labels = kwargs.get("labels")  #FIXME: Must be able to parse string in search of a specific label
 
     def serialize(self):
         """
@@ -34,6 +36,7 @@ class Restaurant(db.Model):
             "id": self.id,
             "name": self.name,
             "desc": self.desc,
+            "labels": self.labels,
             "users": [u.simple_serialize() for u in self.users]
         }
 
