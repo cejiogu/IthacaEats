@@ -32,7 +32,11 @@ def failure_response(message, code=404):
 @app.route("/")
 @app.route("/restaurants/")
 def base():
-    pass
+    """
+    Endpoint that returns all restaurants and their informations
+    """
+    restaurants = [r.serialize() for r in Restaurant.query.all()]
+    return success_response({"restaurants": restaurants})
 
 
 # GET: Get information about a specific restaurant with id "rest_id"
