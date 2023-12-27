@@ -77,10 +77,44 @@ def delete_restaurant(rest_id):
 
 
 # User Routes
-# POST: Create a User object and insert it into the database
+# POST: Create a User 
 @app.route("/user/register/", methods=["POST"])
 def register_user():
-    pass
+    """
+    Endpoint that inserts a new User object into the database
+    """
+    body = json.loads(request.data)
+    f_name = body.get("first_name")
+    if f_name is None:
+        return failure_response("You did not enter a first name!", 400)
+    
+    l_name = body.get("last_name")
+    if l_name is None:
+        return failure_response("You did not enter a last name!", 400)
+    
+    u_name = body.get("user_name")
+    if u_name is None:
+        return failure_response("You did not enter a user name!", 400)
+    
+    email = body.get("email")
+    if email is None:
+        return failure_response("You did not enter an email!", 400)
+    
+    password = body.get("password")
+    if password is None:
+        return failure_response("You did not enter a password!", 400)
+    
+    new_user = User(
+        first_name=f_name,
+        last_name=l_name,
+        user_name=u_name,
+        email=email,
+        password=password
+    )
+    
+    db.session.add(new_user)
+    db.session.commit()
+    return success_response(new_user.simple_serialize, 201)
 
 # POST: Verifies whether the user currently exists or not
 @app.route("/user/login/", methods=["POST"]) # TODO: Come back to, implement refresh session token 
