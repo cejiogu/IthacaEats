@@ -58,11 +58,6 @@ def get_rest(rest_id):
 def get_spec_rest(label):
     pass
 
-# GET: Get all reviews for a specific restaurant with id "rest_id"
-@app.route("/restaurants/<int:rest_id>/reviews/")
-def get_rest_reviews(rest_id):
-    pass
-
 
 # POST: Create a Restaurant object and insert it into the database
 @app.route("/restaurants/", methods=["POST"])
