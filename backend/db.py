@@ -79,7 +79,8 @@ class User(db.Model):
             "first_name": self.f_name,
             "last_name": self.l_name,
             "username": self.username,
-            "email": self.email
+            "email": self.email,
+            "reviews": [r.serialize() for r in Review.query.filter_by(user_id=self.id).all()]
         }
 
     def simple_serialize(self):
@@ -100,6 +101,7 @@ class Review(db.Model):
     rating = db.Column(db.Integer, nullable=False)
     desc = db.Column(db.String, nullable=False) # Reviewers should be forced to give detailed responses explaining their review
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    rest_id = db.Column(db.Integer, db.ForeignKey('restaurant.id'))
 
     user = db.relationship("User")
 
@@ -116,6 +118,7 @@ class Review(db.Model):
         """
         return {
             "id": self.id,
+            "rest_id": Restaurant.query.filter_by(id=self.rest_id).first().serialize(),
             "rating": self.rating,
             "desc": self.desc,
             "user": User.query.filter_by(id=self.user_id).first().simple_serialize()
