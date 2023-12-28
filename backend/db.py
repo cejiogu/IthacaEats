@@ -19,6 +19,10 @@ class Restaurant(db.Model):
     labels = db.Column(db.String, nullable=False)
 
     users = db.relationship("User", secondary=rest_user_association, back_populates="users")
+    
+    # Many-to-One relationship with 'Reviews' table (a Restaurant can have many Reviews, but a Review can only be associated with one Restaurant)
+    # "Cascade='delete'": If a restaurant is removed, all of its associated reviews are deleted
+    reviews = db.relationship("Review", cascade="delete")
 
     def __init__(self, **kwargs):
         """
@@ -37,7 +41,7 @@ class Restaurant(db.Model):
             "name": self.name,
             "desc": self.desc,
             "labels": self.labels,
-            "users": [u.simple_serialize() for u in self.users]
+            "reviews": [r.serialize for r in self.reviews]
         }
 
 class User(db.Model):
@@ -49,7 +53,12 @@ class User(db.Model):
     identifier = db.Column(db.String, nullable=False)
     password = db.Column(db.String, nullable=False)
 
-    restaurants = db.relationship("Restaurant", secondary=rest_user_association, back_populates="users")
+    # Establish Many-to-Many relationship with 'Restaurants' table (many Users can be associated with many restaurants, and vice versa)
+    restaurants = db.relationship("Restaurant", secondary=rest_user_association, back_populates="restaurants")
+
+    # One-to-Many Relationship with 'Reviews' table (a User can be associated with many Reviews, but each Review may only be associated with one User)
+    # "Cascade='delete'": If the User is deleted, all Reviews associated with the User are deleted  
+    reviews = db.relationship("Review", cascade="delete")
 
     def __init__(self, **kwargs):
         """
@@ -80,4 +89,34 @@ class User(db.Model):
         return {
             "id": self.id,
             "username": self.username
+        }
+    
+class Review(db.Model):
+    """
+    Review Model
+    """
+    __tablename__ = "reviews"
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    rating = db.Column(db.Integer, nullable=False)
+    desc = db.Column(db.String, nullable=False) # Reviewers should be forced to give detailed responses explaining their review
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+    user = db.relationship("User")
+
+    def __init__(self, **kwargs):
+        """
+        Initialize Review Object
+        """
+        self.rating = f'{kwargs.get("rating")}/5'
+        self.desc = kwargs.get("description")
+    
+    def serialize(self):
+        """
+        Serialize a Review Object
+        """
+        return {
+            "id": self.id,
+            "rating": self.rating,
+            "desc": self.desc,
+            "user": User.query.filter_by(id=self.user_id).first().simple_serialize()
         }
