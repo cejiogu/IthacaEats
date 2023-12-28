@@ -1,6 +1,7 @@
 import json
 from db import Restaurant
 from db import User
+from db import Review
 from flask import request
 from db import db
 from flask import Flask
@@ -32,7 +33,7 @@ labels = ["Vegan", "Thai", "Jamaican", "Korean", "Chinese", "Japanese", "Vietnam
 # Routes - Restaurant Routes
 # GET: Get all restaurants
 @app.route("/")
-@app.route("/restaurants/")
+@app.route("/<int:user_id>/restaurants/")
 def base():
     """
     Endpoint that returns all restaurants and their informations
@@ -42,7 +43,7 @@ def base():
 
 
 # GET: Get information about a specific restaurant
-@app.route("/restaurants/<int:rest_id>/")
+@app.route("/<int:user_id>/restaurants/<int:rest_id>/")
 def get_rest(rest_id):
     """
     Endpoint that returns the specific restaurant with restaurant id 'rest_id'
@@ -54,7 +55,7 @@ def get_rest(rest_id):
 
 
 # GET: Get information about all restaurants that fall under a specific label "label"
-@app.route("/restaurants/<string:label>/")
+@app.route("/user_id/restaurants/<string:label>/")
 def get_spec_rest(label):
     pass
 
@@ -67,7 +68,7 @@ def create_restaurant():
     if name is None:
         return failure_response("You did not enter the name of the restaurant!", 400)
     
-    description = body.get("desc")
+    description = body.get("description")
     if description is None:
         return failure_response("You did not enter the description of the restaurant", 400)
     
@@ -146,6 +147,34 @@ def get_user(user_id):
 
 
 # POST: Create a review from a specific User for a specific Restaurant
-@app.route("user/<int:user_id>/restaurants")
-def create_review():
-    pass
+@app.route("/user/<int:user_id>/restaurant_<int:rest_id>")
+def create_review(user_id, rest_id):
+    user = User.query.filter_by(id=user_id).first()
+    if user is None:
+        return failure_response("User not found!")
+    
+    restaurant = Restaurant.query.filter_by(id=rest_id).first()
+    if restaurant is None:
+        return failure_response("Restaurant not found!")
+
+    body = json.loads(request.data)
+
+    rating = body.get("rating")
+    if rating is None:
+        return failure_response("You did not enter a rating!", 400)
+    
+    description = body.get("description")
+    if description is None:
+        return failure_response("You did not enter a description!", 400)
+    
+    review = Review(
+        rating=rating,
+        desc=description,
+        user_id=user_id,
+        rest_id=rest_id
+    )
+
+    db.session.add(review)
+    db.commit()
+    return success_response(review.serialize(), 201)
+    
