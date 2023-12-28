@@ -67,7 +67,28 @@ def get_rest_reviews(rest_id):
 # POST: Create a Restaurant object and insert it into the database
 @app.route("/restaurants/", methods=["POST"])
 def create_restaurant():
-    pass
+    body = json.loads(request.data)
+    name = body.get("name")
+    if name is None:
+        return failure_response("You did not enter the name of the restaurant!", 400)
+    
+    description = body.get("desc")
+    if description is None:
+        return failure_response("You did not enter the description of the restaurant", 400)
+    
+    rest_labels = body.get("labels")
+    if rest_labels is None:
+        return failure_response("You did not enter any labels for the restaurant!", 400)
+    
+    restaurant = Restaurant(
+        name=name,
+        desc=description,
+        labels=rest_labels
+    )
+    
+    db.session.add(restaurant)
+    db.session.commit()
+    return success_response(restaurant.serialize(), 201)
 
 
 # DELETE: Remove a specific Restaurant object with id "rest_id" from the database
@@ -77,7 +98,8 @@ def delete_restaurant(rest_id):
 
 
 # User Routes
-# POST: Create a User 
+# POST: Create a User
+# TODO: Come back to, implement session tokens and password hashing
 @app.route("/user/register/", methods=["POST"])
 def register_user():
     """
