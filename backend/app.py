@@ -90,7 +90,12 @@ def create_restaurant():
 # DELETE: Remove a specific Restaurant object with id "rest_id" from the database
 @app.route("/restaurants/", methods=["DELETE"])
 def delete_restaurant(rest_id):
-    pass
+    restaurant = Restaurant.query.filter_by(id=rest_id)
+    if restaurant is None:
+        return failure_response("Restaurant not found!")
+    db.session.delete(restaurant)
+    db.session.commit()
+    return success_response("Restaurant deleted!", 201)
 
 
 # User Routes
