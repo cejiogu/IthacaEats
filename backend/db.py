@@ -100,8 +100,8 @@ class Review(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     rating = db.Column(db.Integer, nullable=False)
     desc = db.Column(db.String, nullable=False) # Reviewers should be forced to give detailed responses explaining their review
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    rest_id = db.Column(db.Integer, db.ForeignKey('restaurant.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    rest_id = db.Column(db.Integer, db.ForeignKey('restaurant.id'), nullable=False)
 
     user = db.relationship("User")
 
@@ -111,6 +111,8 @@ class Review(db.Model):
         """
         self.rating = f'{kwargs.get("rating")}/5'
         self.desc = kwargs.get("description")
+        self.user_id = kwargs.get("user_id")
+        self.rest_id = kwargs.get("rest_id")
     
     def serialize(self):
         """
