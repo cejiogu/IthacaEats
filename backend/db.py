@@ -18,7 +18,7 @@ class Restaurant(db.Model):
     desc = db.Column(db.String, nullable=False) # TODO: Limit character size of description
     labels = db.Column(db.String, nullable=False)
 
-    users = db.relationship("User", secondary=rest_user_association, back_populates="users")
+    # users = db.relationship("User", secondary=rest_user_association, back_populates="restaurants")
     
     # Many-to-One relationship with 'Reviews' table (a Restaurant can have many Reviews, but a Review can only be associated with one Restaurant)
     # "Cascade='delete'": If a restaurant is removed, all of its associated reviews are deleted
@@ -43,6 +43,14 @@ class Restaurant(db.Model):
             "labels": self.labels,
             "reviews": [r.serialize for r in self.reviews]
         }
+    
+    def get_name(self):
+        """
+        Return the name of a Restaurant Object
+        """
+        return {
+            "name": self.name
+        }
 
 class User(db.Model):
     """
@@ -54,7 +62,7 @@ class User(db.Model):
     password = db.Column(db.String, nullable=False)
 
     # Establish Many-to-Many relationship with 'Restaurants' table (many Users can be associated with many restaurants, and vice versa)
-    restaurants = db.relationship("Restaurant", secondary=rest_user_association, back_populates="restaurants")
+    # restaurants = db.relationship("Restaurant", secondary=rest_user_association, back_populates="users")
 
     # One-to-Many Relationship with 'Reviews' table (a User can be associated with many Reviews, but each Review may only be associated with one User)
     # "Cascade='delete'": If the User is deleted, all Reviews associated with the User are deleted  
@@ -101,9 +109,10 @@ class Review(db.Model):
     rating = db.Column(db.Integer, nullable=False)
     desc = db.Column(db.String, nullable=False) # Reviewers should be forced to give detailed responses explaining their review
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    rest_id = db.Column(db.Integer, db.ForeignKey('restaurant.id'), nullable=False)
+    rest_id = db.Column(db.Integer, db.ForeignKey("restaurant.id", nullable=False))
 
     user = db.relationship("User")
+    restaurant = db.relationship("Restaurant")
 
     def __init__(self, **kwargs):
         """
@@ -120,7 +129,7 @@ class Review(db.Model):
         """
         return {
             "id": self.id,
-            "rest_id": Restaurant.query.filter_by(id=self.rest_id).first().serialize(),
+            "restaurant": Restaurant.query.filter_by(id=self.rest_id).first().get_name(),
             "rating": self.rating,
             "desc": self.desc,
             "user": User.query.filter_by(id=self.user_id).first().simple_serialize()
