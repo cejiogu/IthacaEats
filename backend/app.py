@@ -143,11 +143,14 @@ def login():
 # GET: Get a specific user with id "user_id"
 @app.route("/users/<int:user_id>")
 def get_user(user_id):
-    pass
+    user = User.query.filter_by(id=user_id)
+    if user is None:
+        return failure_response("User not found!")
+    return success_response(user.serialize())
 
 
 # POST: Create a review from a specific User for a specific Restaurant
-@app.route("/user/<int:user_id>/restaurant_<int:rest_id>")
+@app.route("/user/<int:user_id>/restaurants/<int:rest_id>/")
 def create_review(user_id, rest_id):
     user = User.query.filter_by(id=user_id).first()
     if user is None:
