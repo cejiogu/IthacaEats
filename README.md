@@ -1,4 +1,4 @@
-# [Personal Project: _IthacaEats_](https://github.com/3TTemi/sportify-backend)
+# [Personal Project: _IthacaEats_](https://github.com/cejiogu/IthacaEats)
 
 ### By: [Chimdi](https://github.com/cejiogu/)
 
