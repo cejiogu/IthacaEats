@@ -12,13 +12,15 @@ _IthacaEats_ is an app that allows its users to:
 - Read information about a specific restaurant, as selected by the user
 - Create a review for any specific restaurant(s)
 
-
 ## Development
 ### Challenges
 ### Insights
 ### Aspirations
-
-
+- Implement authentication feature into backend of application
+- Implement feature to use multiple labels to sort restaurants
+- Implement upvoting/downvoting feature to review system
+- Include time and date on reviews
+- Implement feature to sort reviews by relevance (amount of upvotes) or by recency  
 
 ## How to Use
 
