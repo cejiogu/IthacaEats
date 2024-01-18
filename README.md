@@ -13,6 +13,7 @@ _IthacaEats_ is an app that allows its users to:
 - Create a review for any specific restaurant(s)
 
 ## Development
+Understanding the frontend portion of the application proved especially challenging, since this was my first time working with Kotlin and Android Studio. Notably, the actual Kotlin language was easier to understand than the logic to AndroidStudio's GUIs, as the Kotlin language was reminiscent of Java, while the GUI aspect was entirely new. After spending time to especially study AndroidStudio, I became more comfortable with using views.
 ### Challenges
 ### Insights
 ### Aspirations
