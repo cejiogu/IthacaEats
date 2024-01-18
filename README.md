@@ -7,7 +7,18 @@ Are you a resident of Ithaca, New York, that has been looking to explore the cul
 
 ## Description
 
-## Development: Challenges and Lessons Learned
+_IthacaEats_ is an app that allows its users to:
+- Scroll through a collection of local restaurants in and around CollegeTown, Ithaca, New York
+- Read information about a specific restaurant, as selected by the user
+- Create a review for any specific restaurant(s)
+
+
+## Development
+### Challenges
+### Insights
+### Aspirations
+
+
 
 ## How to Use
 
