@@ -1,6 +1,6 @@
 # [Personal Project: _IthacaEats_](https://github.com/cejiogu/IthacaEats)
 
-### By: [Chimdi](https://github.com/cejiogu/)
+### By: [Chimdi Ejiogu](https://github.com/cejiogu/)
 
 ## Introduction
 Are you a resident of Ithaca, New York, that has been looking to explore the culinary options around you? Introducing IthacaEats — an essential app for residents and visitors alike of the Ithaca community to effortlessly explore the city's diverse restaurant scene. Discover the local favorites, as well as the obscure treasures that Ithaca has to offer, all through this one convenient platform.  
@@ -30,6 +30,6 @@ The development of this application likewise encouraged me to further review my 
 - Implement feature to sort reviews by relevance (amount of upvotes) or by recency  
 
 ## How to Use
-
+TBD
 ## Feedback
 Upon review either the application or the code to the application, feel free to reach out and let me know of places where I could improve my application Thank you for trying IthacaEats!
