@@ -48,15 +48,15 @@
                 app:layout_constraintBottom_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/restaurantImage"
-                app:layout_constraintTop_toBottomOf="@+id/locationText" />
+                app:layout_constraintTop_toBottomOf="@+id/descriptionText" />
 
             <TextView
-                android:id="@+id/locationText"
+                android:id="@+id/descriptionText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginBottom="30dp"
-                android:text="Location"
+                android:text="Description"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/restaurantImage"
