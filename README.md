@@ -22,7 +22,6 @@ Understanding the frontend portion of the application proved especially challeng
 The development of this application likewise encouraged me to further review my knowledge of relational databases, especially in regards to implementing them using SQLAlchemy. I particularly had to review several parameters for the ```relationship()``` (namely the ```back_populates``` and the ```secondary``` parameters).
 
 ### Insights
-- I reviewed much SQL Alchemy during the development of the backend API of the application, 
 ### Aspirations
 - Implement authentication feature into backend of application
 - Implement feature to use multiple labels to sort restaurants
@@ -33,3 +32,4 @@ The development of this application likewise encouraged me to further review my 
 ## How to Use
 
 ## Feedback
+Upon review either the application or the code to the application, feel free to reach out and let me know of places where I could improve my application Thank you for trying IthacaEats!
