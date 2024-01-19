@@ -26,7 +26,7 @@ def failure_response(message, code=404):
     return json.dumps({"error": message}), code
 
 # List representing all possible labels that a restaurnt could use
-labels = ["Vegan", "Thai", "Jamaican", "Korean", "Chinese", "Japanese", "Vietnamese", "LGBT+"]
+labels = ["Vegan", "Thai", "Jamaican", "Korean", "Chinese", "Japanese", "Vietnamese", "LGBT+", "18+"]
 
 # Routes - Restaurant Routes
 # GET: Get all restaurants
@@ -55,7 +55,16 @@ def get_rest(rest_id):
 # GET: Get information about all restaurants that fall under a specific label "label"
 @app.route("/user_id/restaurants/<string:label>/")
 def get_spec_rest(label):
-    pass
+    """
+    Endpoint that returns the restaurants that fall under lable "label"
+    """
+    restaurants = Restaurant.query.filter_by(label=label).all()
+    if restaurants is None:
+        return failure_response("Restaurant not found!")
+    
+    return success_response([r.serialize for r in restaurants])
+
+
 
 
 # POST: Create a Restaurant object and insert it into the database
