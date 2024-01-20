@@ -9,8 +9,13 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 class RestaurantAdapter(
-    val restaurantList: List<Restaurant>
+    val restaurantList: List<Restaurant>,
+    private val mAdapterOnClickHandler: AdapterOnClickHandler
 ) : RecyclerView.Adapter<RestaurantAdapter.RestaurantViewHolder>() {
+
+    interface AdapterOnClickHandler {
+        fun onClick(position: Int)
+    }
 
     class RestaurantViewHolder(view: View): RecyclerView.ViewHolder(view) {
         val nameText : TextView = view.findViewById(R.id.nameText)
@@ -28,6 +33,11 @@ class RestaurantAdapter(
         val restaurant : Restaurant = restaurantList[position]
         holder.nameText.text = restaurant.name
         holder.locationText.text = restaurant.location
+
+        val button:Button = holder.button
+        button.setOnClickListener{
+            mAdapterOnClickHandler.onClick(position)
+        }
     }
 
     override fun getItemCount(): Int {
