@@ -19,8 +19,21 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val exampleRestaurants = listOf(
+            Restaurant(name = "Okenshields", description = "Central"),
+            Restaurant(name = "Morrison", description = "North"),
+            Restaurant(name = "Bethe", description = "West"),
+            Restaurant(name = "Appel", description = "North"),
+            Restaurant(name = "Alice Cook", description = "West"),
+            Restaurant(name = "Terrace", description = "Central"),
+            Restaurant(name = "Trillium", description = "Central"),
+            Restaurant(name = "Mattin's", description = "Central"),
+            Restaurant(name = "Becker", description = "West"),
+            Restaurant(name = "Zeus", description = "Central")
+        )
 
         val recyclerView : RecyclerView = findViewById(R.id.recycler)
         recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.adapter = RestaurantAdapter(exampleRestaurants)
     }
 }
