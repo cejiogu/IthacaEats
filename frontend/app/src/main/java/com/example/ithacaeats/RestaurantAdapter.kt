@@ -14,8 +14,8 @@ class RestaurantAdapter(
 
     class RestaurantViewHolder(view: View): RecyclerView.ViewHolder(view) {
         val nameText : TextView = view.findViewById(R.id.nameText)
-        val descriptionText : TextView = view.findViewById(R.id.descriptionText)
-        val image : ImageView = view.findViewById(R.id.restaurantImage)
+        val locationText : TextView = view.findViewById(R.id.locationText)
+//        val image : ImageView = view.findViewById(R.id.restaurantImage)
         val button: Button = view.findViewById(R.id.button)
     }
 
@@ -27,7 +27,7 @@ class RestaurantAdapter(
     override fun onBindViewHolder(holder: RestaurantViewHolder, position: Int) {
         val restaurant : Restaurant = restaurantList[position]
         holder.nameText.text = restaurant.name
-        holder.descriptionText.text = restaurant.description
+        holder.locationText.text = restaurant.location
     }
 
     override fun getItemCount(): Int {

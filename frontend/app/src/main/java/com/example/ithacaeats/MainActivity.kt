@@ -20,16 +20,16 @@ class MainActivity : ComponentActivity() {
         setContentView(R.layout.activity_main)
 
         val exampleRestaurants = listOf(
-            Restaurant(name = "Okenshields", description = "Central"),
-            Restaurant(name = "Morrison", description = "North"),
-            Restaurant(name = "Bethe", description = "West"),
-            Restaurant(name = "Appel", description = "North"),
-            Restaurant(name = "Alice Cook", description = "West"),
-            Restaurant(name = "Terrace", description = "Central"),
-            Restaurant(name = "Trillium", description = "Central"),
-            Restaurant(name = "Mattin's", description = "Central"),
-            Restaurant(name = "Becker", description = "West"),
-            Restaurant(name = "Zeus", description = "Central")
+            Restaurant(name = "Okenshields", location = "Central"),
+            Restaurant(name = "Morrison", location = "North"),
+            Restaurant(name = "Bethe", location = "West"),
+            Restaurant(name = "Appel", location = "North"),
+            Restaurant(name = "Alice Cook", location = "West"),
+            Restaurant(name = "Terrace", location = "Central"),
+            Restaurant(name = "Trillium", location = "Central"),
+            Restaurant(name = "Mattin's", location = "Central"),
+            Restaurant(name = "Becker", location = "West"),
+            Restaurant(name = "Zeus", location = "Central")
         )
 
         val recyclerView : RecyclerView = findViewById(R.id.recycler)
