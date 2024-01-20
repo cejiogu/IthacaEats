@@ -1,8 +1,12 @@
 package com.example.ithacaeats
 
+import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.cardview.widget.CardView
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -14,7 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ithacaeats.ui.theme.IthacaEatsTheme
 
-class MainActivity : ComponentActivity() {
+class MainActivity : ComponentActivity(), RestaurantAdapter.AdapterOnClickHandler {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -34,6 +38,11 @@ class MainActivity : ComponentActivity() {
 
         val recyclerView : RecyclerView = findViewById(R.id.recycler)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = RestaurantAdapter(exampleRestaurants)
+        recyclerView.adapter = RestaurantAdapter(exampleRestaurants, this)
+    }
+
+    override fun onClick(position: Int) {
+        var i = Intent(this, RestaurantActivity::class.java)
+        startActivity(i)
     }
 }
