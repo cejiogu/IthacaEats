@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">IthacaEats</string>
+    <string name="nameText">Name of Restaurant</string>
+    <string name="locationText">Location of Restaurant</string>
 </resources>
