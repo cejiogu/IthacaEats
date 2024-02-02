@@ -2,8 +2,10 @@ package com.example.ithacaeats
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.cardview.widget.CardView
@@ -41,8 +43,13 @@ class MainActivity : ComponentActivity(), RestaurantAdapter.AdapterOnClickHandle
         recyclerView.adapter = RestaurantAdapter(exampleRestaurants, this)
     }
 
-    override fun onClick(position: Int) {
-        var i = Intent(this, RestaurantActivity::class.java)
-        startActivity(i)
+    override fun onClick(holder: RestaurantAdapter.RestaurantViewHolder) {
+        val restName: String = holder.nameText.text.toString()
+        val restLocation: String = holder.locationText.text.toString()
+
+        val intent = Intent(this, RestaurantActivity::class.java)
+        intent.putExtra("REST_NAME", restName)
+        intent.putExtra("REST_LOCATION", restLocation)
+        startActivity(intent)
     }
 }

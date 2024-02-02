@@ -2,4 +2,7 @@
     <string name="app_name">IthacaEats</string>
     <string name="nameText">Name of Restaurant</string>
     <string name="locationText">Location of Restaurant</string>
+    <string name="descriptionText">Description of Restaurant</string>
+    <string name="rest_buttonText">Return to Main Screen</string>
+    <string name="card_buttonText">More</string>
 </resources>

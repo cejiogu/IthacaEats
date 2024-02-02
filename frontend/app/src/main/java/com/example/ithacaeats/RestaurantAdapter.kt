@@ -14,7 +14,7 @@ class RestaurantAdapter(
 ) : RecyclerView.Adapter<RestaurantAdapter.RestaurantViewHolder>() {
 
     interface AdapterOnClickHandler {
-        fun onClick(position: Int)
+        fun onClick(holder: RestaurantViewHolder)
     }
 
     class RestaurantViewHolder(view: View): RecyclerView.ViewHolder(view) {
@@ -36,7 +36,7 @@ class RestaurantAdapter(
 
         val button:Button = holder.button
         button.setOnClickListener{
-            mAdapterOnClickHandler.onClick(position)
+            mAdapterOnClickHandler.onClick(holder)
         }
     }
 
