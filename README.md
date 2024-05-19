@@ -29,7 +29,5 @@ The development of this application likewise encouraged me to further review my 
 - Include time and date on reviews
 - Implement feature to sort reviews by relevance (amount of upvotes) or by recency  
 
-## How to Use
-TBD
 ## Feedback
 Upon review either the application or the code to the application, feel free to reach out and let me know of places where I could improve my application Thank you for trying IthacaEats!
